@@ -1,0 +1,32 @@
+<!doctype html>
+<title>Python Flask File Upload Example</title>
+<center><h1>Cat or Dog Classifier</h1></center>
+<h2>Select a Image to classify</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img style="height: 10rem; width: 10rem;" src="{{ url_for('display_image', filename=filename) }}">
+	</div>
+{% endif %}
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Predict">
+	</p>
+</form>
+<br>
+<h2>Prediction of Above Image: {{prediction}}</h2>
